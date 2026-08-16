@@ -87,7 +87,10 @@ function CandidateHub() {
 
   async function withdraw(id: string) {
     const { error } = await supabase.from("applications").delete().eq("id", id);
-    if (error) return toast.error(error.message);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
     toast.success("Application withdrawn.");
     void queryClient.invalidateQueries({ queryKey: ["my-applications", user?.id] });
   }
