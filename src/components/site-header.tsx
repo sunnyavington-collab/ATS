@@ -7,9 +7,8 @@ import { cn } from "@/lib/utils";
 
 const nav = [
   { label: "Home", to: "/" },
-  { label: "Find work", to: "/jobs" },
-  { label: "For employers", to: "/employer" },
-  { label: "My hub", to: "/candidate" },
+  { label: "Open roles", to: "/jobs" },
+  { label: "My applications", to: "/candidate" },
 ];
 
 export function SiteHeader() {
@@ -45,7 +44,7 @@ export function SiteHeader() {
                 to={role === "employer" ? "/employer" : "/candidate"}
                 className="text-sm font-medium text-ink-foreground/70 hover:text-primary"
               >
-                {role === "employer" ? "Employer desk" : "Candidate hub"}
+                {role === "employer" ? "Hiring desk" : "My applications"}
               </Link>
               <Button variant="brand" size="sm" onClick={() => void signOut()}>
                 Sign out
