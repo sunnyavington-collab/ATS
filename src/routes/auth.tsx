@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { AudioLines, Briefcase, Building2, Loader2 } from "lucide-react";
+import { AudioLines, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
@@ -8,8 +8,7 @@ import { lovable } from "@/integrations/lovable/index";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useAuth, type Workflow } from "@/lib/auth";
-import { cn } from "@/lib/utils";
+import { useAuth } from "@/lib/auth";
 
 export const Route = createFileRoute("/auth")({
   validateSearch: z.object({
@@ -96,13 +95,13 @@ function AuthPage() {
         </Link>
         <div>
           <h2 className="font-display text-4xl font-bold leading-tight">
-            Two doors.
+            Work with
             <br />
-            <span className="text-primary">One industry.</span>
+            <span className="text-primary">Musicosy.</span>
           </h2>
           <p className="mt-4 max-w-sm text-sm text-ink-foreground/60">
-            Candidates get a hub for applications and bookmarks. Employers get a desk for companies,
-            posts and applicants. Pick your side and we'll route you there every time you sign in.
+            One account to apply for our open studio, stage and label roles — and to see exactly
+            where every application you've sent us stands.
           </p>
         </div>
         <p className="text-xs text-ink-foreground/40">Studios · Stages · Labels · Since 2026</p>
@@ -115,9 +114,10 @@ function AuthPage() {
           </h1>
           <p className="mt-2 text-sm text-muted-foreground">
             {isSignUp
-              ? "Choose the workflow that fits you. You can browse jobs either way."
+              ? "Takes a minute — then you can apply to any open role."
               : "Sign in to pick up where you left off."}
           </p>
+
 
 
 
