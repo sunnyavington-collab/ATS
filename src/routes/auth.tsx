@@ -59,7 +59,7 @@ function AuthPage() {
           password,
           options: {
             emailRedirectTo: window.location.origin,
-            data: { full_name: fullName, role: workflow },
+            data: { full_name: fullName, role: "candidate" },
           },
         });
         if (error) throw error;
@@ -119,36 +119,8 @@ function AuthPage() {
               : "Sign in to pick up where you left off."}
           </p>
 
-          {isSignUp && (
-            <div className="mt-6 grid grid-cols-2 gap-3">
-              {(
-                [
-                  { key: "candidate", label: "I want work", icon: Briefcase },
-                  { key: "employer", label: "I'm hiring", icon: Building2 },
-                ] as const
-              ).map((opt) => (
-                <button
-                  key={opt.key}
-                  type="button"
-                  onClick={() => setWorkflow(opt.key)}
-                  className={cn(
-                    "flex flex-col items-start gap-2 rounded-2xl border p-4 text-left transition-all",
-                    workflow === opt.key
-                      ? "border-primary bg-accent"
-                      : "border-border hover:border-primary/40",
-                  )}
-                >
-                  <opt.icon
-                    className={cn(
-                      "size-5",
-                      workflow === opt.key ? "text-primary" : "text-muted-foreground",
-                    )}
-                  />
-                  <span className="font-display text-sm font-semibold">{opt.label}</span>
-                </button>
-              ))}
-            </div>
-          )}
+
+
 
           <form onSubmit={handleSubmit} className="mt-6 space-y-4">
             {isSignUp && (
