@@ -345,7 +345,7 @@ function CompanyForm({
   existing,
   onDone,
 }: {
-  userId?: string;
+  userId: string | undefined;
   existing?: CompanyRow | null;
   onDone: () => void;
 }) {
@@ -426,7 +426,7 @@ function JobForm({
   onDone,
 }: {
   companyId: string;
-  userId?: string;
+  userId: string | undefined;
   onDone: () => void;
 }) {
   const [title, setTitle] = useState("");
