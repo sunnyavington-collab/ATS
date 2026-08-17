@@ -14,20 +14,19 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/auth")({
   validateSearch: z.object({
     mode: z.enum(["in", "up"]).optional(),
-    as: z.enum(["candidate", "employer"]).optional(),
   }),
   head: () => ({
     meta: [
-      { title: "Sign in or join Musicosy — music industry jobs" },
+      { title: "Sign in or create your Musicosy account" },
       {
         name: "description",
         content:
-          "Create a Musicosy account as a candidate looking for music work, or as an employer hiring studio, live and label talent.",
+          "Create a Musicosy account to apply for open roles at Musicosy and track where each of your applications stands.",
       },
-      { property: "og:title", content: "Sign in or join Musicosy" },
+      { property: "og:title", content: "Sign in or create your Musicosy account" },
       {
         property: "og:description",
-        content: "Two workflows, one platform: find music work or hire music people.",
+        content: "Apply for open Musicosy roles and track your applications.",
       },
     ],
   }),
@@ -35,10 +34,9 @@ export const Route = createFileRoute("/auth")({
 });
 
 function AuthPage() {
-  const { mode = "up", as } = Route.useSearch();
+  const { mode = "up" } = Route.useSearch();
   const navigate = useNavigate();
   const { user, role } = useAuth();
-  const [workflow, setWorkflow] = useState<Workflow>(as ?? "candidate");
   const [isSignUp, setIsSignUp] = useState(mode === "up");
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
