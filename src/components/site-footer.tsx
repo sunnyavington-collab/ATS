@@ -13,25 +13,27 @@ export function SiteFooter() {
             <span className="font-display text-lg font-bold">Musicosy</span>
           </div>
           <p className="mt-3 text-sm text-ink-foreground/60">
-            Careers at Musicosy — the studio, stage and label roles we're hiring for, straight from
-            the source.
+            The hiring floor for the music industry — studios, stages, labels and the people who
+            keep them running.
           </p>
         </div>
         <div className="flex gap-10 text-sm">
           <div className="space-y-2">
-            <p className="font-display font-semibold">Work with us</p>
+            <p className="font-display font-semibold">Candidates</p>
             <Link to="/jobs" className="block text-ink-foreground/60 hover:text-primary">
-              Open roles
+              Browse roles
             </Link>
             <Link to="/candidate" className="block text-ink-foreground/60 hover:text-primary">
-              My applications
+              Candidate hub
             </Link>
-            <Link
-              to="/auth"
-              search={{ mode: "up" }}
-              className="block text-ink-foreground/60 hover:text-primary"
-            >
-              Create an account
+          </div>
+          <div className="space-y-2">
+            <p className="font-display font-semibold">Employers</p>
+            <Link to="/employer" className="block text-ink-foreground/60 hover:text-primary">
+              Employer desk
+            </Link>
+            <Link to="/auth" search={{ mode: "up" }} className="block text-ink-foreground/60 hover:text-primary">
+              Post a role
             </Link>
           </div>
         </div>

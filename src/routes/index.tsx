@@ -379,7 +379,7 @@ function Home() {
               One hub for the roles you saved, the applications you sent and where each one stands.
             </p>
             <Button asChild variant="brand" className="mt-6">
-              <Link to="/auth" search={{ mode: "up" }}>
+              <Link to="/auth" search={{ mode: "up", as: "candidate" }}>
                 Find work <ArrowUpRight className="size-4" />
               </Link>
             </Button>
@@ -391,7 +391,7 @@ function Home() {
               Register your company, publish roles and review every applicant from one desk.
             </p>
             <Button asChild variant="ink" className="mt-6">
-              <Link to="/auth" search={{ mode: "up" }}>
+              <Link to="/auth" search={{ mode: "up", as: "employer" }}>
                 Start hiring <ArrowUpRight className="size-4" />
               </Link>
             </Button>

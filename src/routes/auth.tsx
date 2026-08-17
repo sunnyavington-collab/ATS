@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { AudioLines, Loader2 } from "lucide-react";
+import { AudioLines, Briefcase, Building2, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
@@ -8,24 +8,26 @@ import { lovable } from "@/integrations/lovable/index";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useAuth } from "@/lib/auth";
+import { useAuth, type Workflow } from "@/lib/auth";
+import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/auth")({
   validateSearch: z.object({
     mode: z.enum(["in", "up"]).optional(),
+    as: z.enum(["candidate", "employer"]).optional(),
   }),
   head: () => ({
     meta: [
-      { title: "Sign in or create your Musicosy account" },
+      { title: "Sign in or join Musicosy — music industry jobs" },
       {
         name: "description",
         content:
-          "Create a Musicosy account to apply for open roles at Musicosy and track where each of your applications stands.",
+          "Create a Musicosy account as a candidate looking for music work, or as an employer hiring studio, live and label talent.",
       },
-      { property: "og:title", content: "Sign in or create your Musicosy account" },
+      { property: "og:title", content: "Sign in or join Musicosy" },
       {
         property: "og:description",
-        content: "Apply for open Musicosy roles and track your applications.",
+        content: "Two workflows, one platform: find music work or hire music people.",
       },
     ],
   }),
@@ -33,9 +35,10 @@ export const Route = createFileRoute("/auth")({
 });
 
 function AuthPage() {
-  const { mode = "up" } = Route.useSearch();
+  const { mode = "up", as } = Route.useSearch();
   const navigate = useNavigate();
   const { user, role } = useAuth();
+  const [workflow, setWorkflow] = useState<Workflow>(as ?? "candidate");
   const [isSignUp, setIsSignUp] = useState(mode === "up");
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -58,7 +61,7 @@ function AuthPage() {
           password,
           options: {
             emailRedirectTo: window.location.origin,
-            data: { full_name: fullName, role: "candidate" },
+            data: { full_name: fullName, role: workflow },
           },
         });
         if (error) throw error;
@@ -95,13 +98,13 @@ function AuthPage() {
         </Link>
         <div>
           <h2 className="font-display text-4xl font-bold leading-tight">
-            Work with
+            Two doors.
             <br />
-            <span className="text-primary">Musicosy.</span>
+            <span className="text-primary">One industry.</span>
           </h2>
           <p className="mt-4 max-w-sm text-sm text-ink-foreground/60">
-            One account to apply for our open studio, stage and label roles — and to see exactly
-            where every application you've sent us stands.
+            Candidates get a hub for applications and bookmarks. Employers get a desk for companies,
+            posts and applicants. Pick your side and we'll route you there every time you sign in.
           </p>
         </div>
         <p className="text-xs text-ink-foreground/40">Studios · Stages · Labels · Since 2026</p>
@@ -114,13 +117,40 @@ function AuthPage() {
           </h1>
           <p className="mt-2 text-sm text-muted-foreground">
             {isSignUp
-              ? "Takes a minute — then you can apply to any open role."
+              ? "Choose the workflow that fits you. You can browse jobs either way."
               : "Sign in to pick up where you left off."}
           </p>
 
-
-
-
+          {isSignUp && (
+            <div className="mt-6 grid grid-cols-2 gap-3">
+              {(
+                [
+                  { key: "candidate", label: "I want work", icon: Briefcase },
+                  { key: "employer", label: "I'm hiring", icon: Building2 },
+                ] as const
+              ).map((opt) => (
+                <button
+                  key={opt.key}
+                  type="button"
+                  onClick={() => setWorkflow(opt.key)}
+                  className={cn(
+                    "flex flex-col items-start gap-2 rounded-2xl border p-4 text-left transition-all",
+                    workflow === opt.key
+                      ? "border-primary bg-accent"
+                      : "border-border hover:border-primary/40",
+                  )}
+                >
+                  <opt.icon
+                    className={cn(
+                      "size-5",
+                      workflow === opt.key ? "text-primary" : "text-muted-foreground",
+                    )}
+                  />
+                  <span className="font-display text-sm font-semibold">{opt.label}</span>
+                </button>
+              ))}
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className="mt-6 space-y-4">
             {isSignUp && (

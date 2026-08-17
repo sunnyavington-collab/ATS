@@ -81,7 +81,7 @@ function EmployerDesk() {
   const [tab, setTab] = useState<"jobs" | "applicants" | "company">("jobs");
 
   useEffect(() => {
-    if (!loading && !user) void navigate({ to: "/auth", search: { mode: "up" } });
+    if (!loading && !user) void navigate({ to: "/auth", search: { mode: "up", as: "employer" } });
   }, [loading, user, navigate]);
 
   const { data: companies = [] } = useQuery({
@@ -345,7 +345,7 @@ function CompanyForm({
   existing,
   onDone,
 }: {
-  userId: string | undefined;
+  userId?: string;
   existing?: CompanyRow | null;
   onDone: () => void;
 }) {
@@ -426,7 +426,7 @@ function JobForm({
   onDone,
 }: {
   companyId: string;
-  userId: string | undefined;
+  userId?: string;
   onDone: () => void;
 }) {
   const [title, setTitle] = useState("");

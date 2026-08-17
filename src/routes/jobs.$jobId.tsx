@@ -62,7 +62,7 @@ function JobDetail() {
 
   async function apply() {
     if (!user) {
-      void navigate({ to: "/auth", search: { mode: "up" } });
+      void navigate({ to: "/auth", search: { mode: "up", as: "candidate" } });
       return;
     }
     setBusy(true);
