@@ -8,8 +8,6 @@ import { cn } from "@/lib/utils";
 const nav = [
   { label: "Home", to: "/" },
   { label: "Find work", to: "/jobs" },
-  { label: "For employers", to: "/employer" },
-  { label: "My hub", to: "/candidate" },
 ];
 
 export function SiteHeader() {
