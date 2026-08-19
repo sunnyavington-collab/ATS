@@ -58,6 +58,7 @@ export type Database = {
           created_at: string
           description: string | null
           id: string
+          is_house: boolean
           location: string | null
           name: string
           owner_id: string | null
@@ -69,6 +70,7 @@ export type Database = {
           created_at?: string
           description?: string | null
           id?: string
+          is_house?: boolean
           location?: string | null
           name: string
           owner_id?: string | null
@@ -80,6 +82,7 @@ export type Database = {
           created_at?: string
           description?: string | null
           id?: string
+          is_house?: boolean
           location?: string | null
           name?: string
           owner_id?: string | null
